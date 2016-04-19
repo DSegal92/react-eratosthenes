@@ -28,21 +28,28 @@ var Number = React.createClass({
 
 var Sieve = React.createClass({
   getInitialState: function() {
-    return { sieve: [], hello: '' };
+    return { sieve: [], hello: '', count: 0 };
   },
-  componentDidMount: function() {
+  loadSieveCount: function(){
     $.ajax({
       url: 'http://localhost:3000/sieve',
       cache: false,
       success: function(data) {
-        this.setState({ sieve: getPrimes(data["upper_limit"]).toJS() });
-        this.setState({ hello: 'world'})
-        console.log(JSON.stringify(this.state.sieve))
+        if (data["upper_limit"] != this.state.count) {
+          this.setState({ sieve: getPrimes(data["upper_limit"]).toJS(), count: data["upper_limit"] });
+        }
+        else {
+          console.log('no change')
+        }
       }.bind(this),
       error: function(xhr, status, err) {
         console.error(this.props.url, status, err.toString());
       }.bind(this)
     });
+  },
+  componentDidMount: function() {
+    this.loadSieveCount();
+    setInterval(this.loadSieveCount, 100)
   },
   render: function() {
     return (

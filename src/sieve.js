@@ -1,7 +1,7 @@
 import { Map, List } from 'immutable';
 
 export function getPrimes(size) {
-  return sieveItUp(makeArrayFromSize(size));
+  return sieveItUp(makeArrayFromSize(size+1));
 }
 
 function makeArrayFromSize(size) {

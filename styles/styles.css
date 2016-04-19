@@ -1,0 +1,21 @@
+.number {
+  display: block;
+  width: 100px;
+  height: 100px;
+  margin: 20px;
+  background-color: blue;
+  font-family: 'Helvetica';
+  font-size: 30px;
+  color: white;
+  float: left;
+  text-align: center;
+  line-height: 100px;
+}
+
+.number.prime.special {
+  background-color: orange;
+}
+
+.number.not-prime {
+  background-color: red;
+}
